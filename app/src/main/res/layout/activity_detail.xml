@@ -32,10 +32,10 @@
         android:textSize="30sp"
         android:layout_margin="10dp"/>
     <TextView
-        android:id="@+id/tvDob"
+        android:id="@+id/tvAge"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="DOB"
+        android:hint="Age"
         android:textSize="30sp"
         android:layout_margin="10dp"/>
     <TextView

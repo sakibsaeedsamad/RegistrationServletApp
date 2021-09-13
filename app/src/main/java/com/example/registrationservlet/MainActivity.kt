@@ -73,7 +73,7 @@ class MainActivity : AppCompatActivity() {
                     i.putExtra("name", it.name)
                     i.putExtra("mobile", it.mobile)
                     i.putExtra("email", it.email)
-                    i.putExtra("dob", it.dob)
+                    i.putExtra("age", it.age)
                     i.putExtra("gender", it.gender)
                     i.putExtra("address", it.address)
                     i.putExtra("role", it.role)
