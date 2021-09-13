@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/etName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+
+    <EditText
+        android:id="@+id/etMobile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Mobile"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Email"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/etDob"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="DOB"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/etGender"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Gender"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/etAddress"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Address"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+    <EditText
+        android:id="@+id/etRole"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Role"
+        android:textSize="30sp"
+        android:layout_margin="10dp"/>
+
+
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register"
+        android:textSize="30sp"
+        android:textColor="@color/black"
+        android:layout_margin="10dp"/>
+
+
+
+
+
+</LinearLayout>
