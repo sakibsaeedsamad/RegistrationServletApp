@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Sakib/AppData/Local/Android/Sdk/platforms/android-30/data/res/layout/simple_spinner_item.xml" value="0.1" />
         <entry key="..\:/Users/Sakib/StudioProjects/RegistrationServlet/app/src/main/res/layout/activity_detail.xml" value="0.1" />
         <entry key="..\:/Users/Sakib/StudioProjects/RegistrationServlet/app/src/main/res/layout/activity_main.xml" value="0.15625" />
+        <entry key="..\:/Users/Sakib/StudioProjects/RegistrationServlet/app/src/main/res/layout/spinner_text.xml" value="0.1734375" />
       </map>
     </option>
   </component>

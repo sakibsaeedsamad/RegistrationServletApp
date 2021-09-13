@@ -24,6 +24,9 @@ data class User(
 
     @SerializedName("role")
     var role: String?,
+    
+    @SerializedName("age")
+    var age: String?,
 
 
     @SerializedName("errorCode")

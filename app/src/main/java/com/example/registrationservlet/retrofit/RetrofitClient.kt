@@ -1,6 +1,7 @@
 package com.example.registrationservlet.retrofit
 
 import com.example.registrationservlet.model.InsertModel
+import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
 import com.google.gson.GsonBuilder
 import io.reactivex.Single
@@ -62,6 +63,11 @@ class RetrofitClient {
 
     }
 
+    fun doGetAllRoleList(model: InsertModel): Single<List<Role>> {
+        return api.doGetAllRoleList(
+            model.requestCode
 
+        )
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.example.registrationservlet.retrofit
 
+import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
 import io.reactivex.Single
 import retrofit2.http.Field
@@ -23,5 +24,12 @@ interface API {
 
     ): Single<User>
 
+
+
+    @FormUrlEncoded
+    @POST("UserApi")
+    fun doGetAllRoleList(
+        @Field("requestCode") requestCode: String?
+    ): Single < List<Role>>
 
 }

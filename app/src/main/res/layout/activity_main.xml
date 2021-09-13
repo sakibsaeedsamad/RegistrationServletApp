@@ -11,67 +11,105 @@
         android:id="@+id/etName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="Name"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
+        android:textSize="30sp" />
 
     <EditText
         android:id="@+id/etMobile"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="Mobile"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
+        android:textSize="30sp" />
 
 
     <EditText
         android:id="@+id/etEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="Email"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
-    <EditText
-        android:id="@+id/etDob"
+        android:textSize="30sp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="DOB"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
+        android:orientation="horizontal"
+        android:weightSum="3">
+
+        <EditText
+            android:id="@+id/etDob"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:hint="DOB"
+            android:textSize="30sp" />
+
+
+        <ImageButton
+            android:id="@+id/btnDatepick"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="2dp"
+            android:layout_weight="2"
+            android:scaleType="fitCenter"
+            android:src="@drawable/ic_datepicker"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+            android:textColor="#FFFF"
+
+            />
+
+    </LinearLayout>
+
+
     <EditText
         android:id="@+id/etGender"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="Gender"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
+        android:textSize="30sp" />
+
     <EditText
         android:id="@+id/etAddress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:hint="Address"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
-    <EditText
-        android:id="@+id/etRole"
+        android:textSize="30sp" />
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Role"
-        android:textSize="30sp"
-        android:layout_margin="10dp"/>
+        android:orientation="horizontal"
+        android:weightSum="2">
 
+        <TextView
+            android:id="@+id/TvRoleM"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:layout_weight="1"
+            android:textSize="30sp" />
+
+        <Spinner
+            android:id="@+id/roleSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="10dp"
         android:text="Register"
-        android:textSize="30sp"
         android:textColor="@color/black"
-        android:layout_margin="10dp"/>
-
-
-
+        android:textSize="30sp" />
 
 
 </LinearLayout>

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.registrationservlet.model.InsertModel
+import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
 import com.example.registrationservlet.retrofit.RetrofitClient
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -19,6 +20,9 @@ class UserViewModel: ViewModel() {
 
     var userInsert_response = MutableLiveData<User>();
     var userInsert_response_error = MutableLiveData<Boolean>();
+
+    var roleGet_response = MutableLiveData<List<Role>>();
+    var roleGet_response_error = MutableLiveData<Boolean>();
 
     fun doInsert(model: InsertModel) {
 
@@ -45,5 +49,34 @@ class UserViewModel: ViewModel() {
                 })
         )
     }
+
+
+
+    fun doGetAllRoleList(model: InsertModel) {
+
+        disposable.add(
+            apiService.doGetAllRoleList(model)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<Role>>() {
+                    override fun onSuccess(model: List< Role>) {
+                        model?.let {
+                            roleGet_response.value=model
+                        }
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                        roleGet_response_error.value = true
+                        Log.e("Login-->", e.toString())
+
+                    }
+
+                })
+        )
+    }
+
+
 
 }
