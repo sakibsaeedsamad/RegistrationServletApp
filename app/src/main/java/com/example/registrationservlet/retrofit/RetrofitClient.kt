@@ -1,5 +1,6 @@
 package com.example.registrationservlet.retrofit
 
+import com.example.registrationservlet.model.Gender
 import com.example.registrationservlet.model.InsertModel
 import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
@@ -69,5 +70,13 @@ class RetrofitClient {
 
         )
     }
+    fun doGetGenderList(model: InsertModel): Single<List<Gender>> {
+        return api.doGetGenderList(
+            model.requestCode
+
+        )
+    }
+
+
 
 }

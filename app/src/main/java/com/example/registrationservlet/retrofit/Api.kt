@@ -1,5 +1,6 @@
 package com.example.registrationservlet.retrofit
 
+import com.example.registrationservlet.model.Gender
 import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
 import io.reactivex.Single
@@ -31,5 +32,13 @@ interface API {
     fun doGetAllRoleList(
         @Field("requestCode") requestCode: String?
     ): Single < List<Role>>
+
+    @FormUrlEncoded
+    @POST("UserApi")
+    fun doGetGenderList(
+        @Field("requestCode") requestCode: String?
+    ): Single < List<Gender>>
+
+
 
 }

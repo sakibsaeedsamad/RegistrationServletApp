@@ -4,6 +4,7 @@ package com.example.registrationservlet.viewmodel
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.example.registrationservlet.model.Gender
 import com.example.registrationservlet.model.InsertModel
 import com.example.registrationservlet.model.Role
 import com.example.registrationservlet.model.User
@@ -24,6 +25,9 @@ class UserViewModel: ViewModel() {
     var roleGet_response = MutableLiveData<List<Role>>();
     var roleGet_response_error = MutableLiveData<Boolean>();
 
+    var genderGet_response = MutableLiveData<List<Gender>>();
+    var genderGet_response_error = MutableLiveData<Boolean>();
+
     fun doInsert(model: InsertModel) {
 
         disposable.add(
@@ -42,7 +46,7 @@ class UserViewModel: ViewModel() {
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         userInsert_response_error.value = true
-                        Log.e("Login-->", e.toString())
+                        Log.e("Insert-->", e.toString())
 
                     }
 
@@ -69,7 +73,32 @@ class UserViewModel: ViewModel() {
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         roleGet_response_error.value = true
-                        Log.e("Login-->", e.toString())
+                        Log.e("GetRole-->", e.toString())
+
+                    }
+
+                })
+        )
+    }
+
+     fun doGetGenderList(model: InsertModel) {
+
+        disposable.add(
+            apiService.doGetGenderList(model)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<Gender>>() {
+                    override fun onSuccess(model: List< Gender>) {
+                        model?.let {
+                            genderGet_response.value=model
+                        }
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                        genderGet_response_error.value = true
+                        Log.e("GetGender-->", e.toString())
 
                     }
 
