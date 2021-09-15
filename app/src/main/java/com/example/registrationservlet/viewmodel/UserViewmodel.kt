@@ -73,7 +73,7 @@ class UserViewModel: ViewModel() {
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         roleGet_response_error.value = true
-                        Log.e("GetRole-->", e.toString())
+                        Log.e("Role-->", e.toString())
 
                     }
 
@@ -98,7 +98,7 @@ class UserViewModel: ViewModel() {
                     override fun onError(e: Throwable) {
                         e.printStackTrace()
                         genderGet_response_error.value = true
-                        Log.e("GetGender-->", e.toString())
+                        Log.e("Gender-->", e.toString())
 
                     }
 

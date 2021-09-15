@@ -1,21 +1,22 @@
 package com.example.registrationservlet
 
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.util.Log
-import androidx.lifecycle.ViewModelProvider
-import com.example.registrationservlet.model.InsertModel
-import com.example.registrationservlet.viewmodel.UserViewModel
-import kotlinx.android.synthetic.main.activity_main.*
 import android.app.DatePickerDialog
 import android.content.ContentValues.TAG
-
 import android.content.Intent
+import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.view.ViewGroup
 import android.widget.*
+import android.widget.LinearLayout
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.registrationservlet.model.Gender
-import java.util.*
+import com.example.registrationservlet.model.InsertModel
 import com.example.registrationservlet.model.Role
+import com.example.registrationservlet.viewmodel.UserViewModel
+import kotlinx.android.synthetic.main.activity_main.*
+import java.util.*
 
 
 class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, View.OnClickListener {
@@ -34,7 +35,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
     var roleCode: String = ""
 
-    lateinit var genderString: String
+    var genderString: String = ""
 
     private lateinit var userViewModel: UserViewModel
 
@@ -53,7 +54,6 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
         etName.setText("SAKIB")
         etMobile.setText("01933575667")
         etEmail.setText("sssakib@gmail.com")
-        //etGender.setText("Male")
         etAddress.setText("Dhaka")
 
         getRoleData()
@@ -219,9 +219,9 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
         model.mobile = etMobile.getText().toString().trim()
         model.email = etEmail.getText().toString().trim()
         model.dob = etDob.getText().toString().trim()
-        model.gender = genderString //model.gender = etGender.getText().toString().trim()
+        model.gender = genderString
         model.address = etDob.getText().toString().trim()
-        model.role = roleCode //TvRoleM.getText().toString().trim()
+        model.role = roleCode
 
 
         this.let { it1 -> userViewModel.doInsert(model) }
@@ -276,48 +276,39 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
 
         if (genderList != null) {
-            // roleDropdown.clear()
+           roleDropdown.clear()
             val i: Iterator<Any> = genderList.iterator()
             while (i.hasNext()) {
                 val roleModel = Gender(i.next().toString(), i.next().toString())
                 gendDesc.add(roleModel.genDesc.toString())
 
             }
-
-
             addRadioButtons(gendDesc.size)
-
-//        femaleRadioButton.setText(gendDesc[0])
-//        maleRadioButton.setText(gendDesc[1])
-
-//            radioGroup.setOnCheckedChangeListener(RadioGroup.OnCheckedChangeListener() { radioGroup: RadioGroup, checkedId: Int ->
-//
-//                when (checkedId) {
-//
-//
-//                R.id.maleRadioButton -> genderString = gendDesc[1]
-//                R.id.femaleRadioButton -> genderString = gendDesc[0]
-//                }
-//            });
 
         }
     }
 
     fun addRadioButtons(number: Int) {
         radioGroup!!.orientation = LinearLayout.VERTICAL
-        //
+
         for (i in 1..number) {
             val rdbtn = RadioButton(this)
             rdbtn.id = View.generateViewId()
-            rdbtn.setText(gendDesc[i-1])
+            rdbtn.setText(gendDesc[i - 1])
             rdbtn.setOnClickListener(this)
+            val params =
+                LinearLayout.LayoutParams(
+                    ViewGroup.LayoutParams.MATCH_PARENT,
+                    ViewGroup.LayoutParams.WRAP_CONTENT,
+                    1f
+                )
+            rdbtn.setLayoutParams(params)
             radioGroup!!.addView(rdbtn)
         }
     }
 
     override fun onClick(v: View?) {
-        Log.d(TAG, " Name " + (v as RadioButton).text + " Id is " + v.getId())
+        Log.d("Radio Button", " Name " + (v as RadioButton).text + " Id is " + v.getId())
+        genderString = (v as RadioButton).text.toString()
     }
-
-
 }
