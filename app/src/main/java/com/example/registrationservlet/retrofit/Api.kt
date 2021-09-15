@@ -39,6 +39,12 @@ interface API {
         @Field("requestCode") requestCode: String?
     ): Single < List<Gender>>
 
+    @FormUrlEncoded
+    @POST("UserApi")
+    fun doGetUserList(
+        @Field("requestCode") requestCode: String?
+    ): Single < List<User>>
+
 
 
 }

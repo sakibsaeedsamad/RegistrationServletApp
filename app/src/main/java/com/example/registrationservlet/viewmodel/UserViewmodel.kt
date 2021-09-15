@@ -14,7 +14,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.observers.DisposableSingleObserver
 import io.reactivex.schedulers.Schedulers
 
-class UserViewModel: ViewModel() {
+class UserViewModel : ViewModel() {
 
     private val apiService = RetrofitClient()
     private val disposable = CompositeDisposable()
@@ -28,6 +28,10 @@ class UserViewModel: ViewModel() {
     var genderGet_response = MutableLiveData<List<Gender>>();
     var genderGet_response_error = MutableLiveData<Boolean>();
 
+
+    var userListGet_response = MutableLiveData<List<User>>();
+    var userListGet_response_error = MutableLiveData<Boolean>();
+
     fun doInsert(model: InsertModel) {
 
         disposable.add(
@@ -37,8 +41,8 @@ class UserViewModel: ViewModel() {
                 .subscribeWith(object : DisposableSingleObserver<User>() {
                     override fun onSuccess(model: User) {
                         model?.let {
-                            Log.d("Success ", "onSuccess: " +model.errorMessage)
-                            userInsert_response.value=model
+                            Log.d("Success ", "onSuccess: " + model.errorMessage)
+                            userInsert_response.value = model
                         }
 
                     }
@@ -54,8 +58,6 @@ class UserViewModel: ViewModel() {
         )
     }
 
-
-
     fun doGetAllRoleList(model: InsertModel) {
 
         disposable.add(
@@ -63,9 +65,9 @@ class UserViewModel: ViewModel() {
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Role>>() {
-                    override fun onSuccess(model: List< Role>) {
+                    override fun onSuccess(model: List<Role>) {
                         model?.let {
-                            roleGet_response.value=model
+                            roleGet_response.value = model
                         }
 
                     }
@@ -81,16 +83,16 @@ class UserViewModel: ViewModel() {
         )
     }
 
-     fun doGetGenderList(model: InsertModel) {
+    fun doGetGenderList(model: InsertModel) {
 
         disposable.add(
             apiService.doGetGenderList(model)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeWith(object : DisposableSingleObserver<List<Gender>>() {
-                    override fun onSuccess(model: List< Gender>) {
+                    override fun onSuccess(model: List<Gender>) {
                         model?.let {
-                            genderGet_response.value=model
+                            genderGet_response.value = model
                         }
 
                     }
@@ -106,6 +108,31 @@ class UserViewModel: ViewModel() {
         )
     }
 
+
+    fun doGetUserList(model: InsertModel) {
+
+        disposable.add(
+            apiService.doGetUserList(model)
+                .subscribeOn(Schedulers.newThread())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeWith(object : DisposableSingleObserver<List<User>>() {
+                    override fun onSuccess(model: List<User>) {
+                        model?.let {
+                            userListGet_response.value = model
+                        }
+
+                    }
+
+                    override fun onError(e: Throwable) {
+                        e.printStackTrace()
+                        userListGet_response_error.value = true
+                        Log.e("Gender-->", e.toString())
+
+                    }
+
+                })
+        )
+    }
 
 
 }

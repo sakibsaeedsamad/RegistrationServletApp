@@ -77,6 +77,14 @@ class RetrofitClient {
         )
     }
 
+    fun doGetUserList(model: InsertModel): Single<List<User>> {
+        return api.doGetUserList(
+            model.requestCode
+
+        )
+    }
+
+
 
 
 }

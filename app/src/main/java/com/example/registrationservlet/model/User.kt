@@ -28,10 +28,14 @@ data class User(
     @SerializedName("age")
     var age: String?,
 
-
     @SerializedName("errorCode")
     var errorCode: String?,
 
     @SerializedName("errorMessage")
-    var errorMessage: String?
+    var errorMessage: String?,
+
+    @SerializedName("roledesc")
+    var roleDesc: String?
+
+
 )

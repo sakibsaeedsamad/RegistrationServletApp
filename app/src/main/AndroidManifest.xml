@@ -13,6 +13,9 @@
         android:theme="@style/Theme.RegistrationServlet"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".UserList"
+            android:exported="true" />
+        <activity
             android:name=".DetailActivity"
             android:exported="true" />
         <activity

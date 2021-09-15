@@ -1,10 +1,11 @@
 package com.example.registrationservlet
 
 import android.app.DatePickerDialog
-import android.content.ContentValues.TAG
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -49,13 +50,6 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
         userViewModel = ViewModelProvider(this).get(UserViewModel::class.java)
 
 
-
-
-        etName.setText("SAKIB")
-        etMobile.setText("01933575667")
-        etEmail.setText("sssakib@gmail.com")
-        etAddress.setText("Dhaka")
-
         getRoleData()
 
         getGenderData()
@@ -76,6 +70,12 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
             doInsert()
         }
 
+        btnShowUser.setOnClickListener {
+
+            val i = Intent(this, UserList::class.java)
+            startActivity(i)
+        }
+
 
 
         observeViewModel()
@@ -86,7 +86,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
     override fun onDateSet(view: DatePicker?, year: Int, month: Int, dayOfMonth: Int) {
 
 
-        etDob.setText("" + dayOfMonth + "/" + (month + 1) + "/" + year)
+        tvDobirth.setText("" + dayOfMonth + "/" + (month + 1) + "/" + year)
     }
 
     private fun observeViewModel() {
@@ -112,16 +112,6 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
                     ).show()
 
 
-                } else {
-                    val i = Intent(this, DetailActivity::class.java)
-                    i.putExtra("name", it.name)
-                    i.putExtra("mobile", it.mobile)
-                    i.putExtra("email", it.email)
-                    i.putExtra("age", it.age)
-                    i.putExtra("gender", it.gender)
-                    i.putExtra("address", it.address)
-                    i.putExtra("role", it.role)
-                    startActivity(i)
                 }
 
 
@@ -213,18 +203,96 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
 
     private fun doInsert() {
-        var model = InsertModel()
-        model.requestCode = ("1")
-        model.name = etName.getText().toString().trim()
-        model.mobile = etMobile.getText().toString().trim()
-        model.email = etEmail.getText().toString().trim()
-        model.dob = etDob.getText().toString().trim()
-        model.gender = genderString
-        model.address = etDob.getText().toString().trim()
-        model.role = roleCode
+
+        
+        if(etName.getText().toString().trim().isEmpty()){
+            Toast.makeText(
+                this,
+                "Please enter your name.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else if(etMobile.getText().toString().trim().isEmpty() ){
+            Toast.makeText(
+                this,
+                "Please enter Mobile Number.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else if(etMobile.getText().toString().trim().length <11 || etMobile.getText().toString().trim().length > 11 ){
+            Toast.makeText(
+                this,
+                "Please enter valid Mobile Number.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else if(etEmail.getText().toString().trim().isEmpty()){
+            Toast.makeText(
+                this,
+                "Please Enter Email Address.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
+        else if(!isValidEmail(etEmail.getText().toString().trim()) ){
+            Toast.makeText(
+                this,
+                "Please Enter valid Email Address.",
+                Toast.LENGTH_LONG
+            ).show()
+
+        }
+        else if(tvDobirth.getText().toString().trim().isEmpty()){
+            Toast.makeText(
+                this,
+                "Please enter Your BirthDay.",
+                Toast.LENGTH_LONG
+            ).show()
+        }else if(genderString.isEmpty()){
+            Toast.makeText(
+                this,
+                "Please Select Gender.",
+                Toast.LENGTH_LONG
+            ).show()
+
+        }
+        else if(etAddress.getText().toString().trim().isEmpty()){
+            Toast.makeText(
+                this,
+                "Please Enter Address.",
+                Toast.LENGTH_LONG
+            ).show()
+        }
 
 
-        this.let { it1 -> userViewModel.doInsert(model) }
+
+
+
+
+        else {
+
+            var model = InsertModel()
+            model.requestCode = ("1")
+
+
+            model.name = etName.getText().toString().trim()
+            model.mobile = etMobile.getText().toString().trim()
+            model.email = etEmail.getText().toString().trim()
+            model.dob = tvDobirth.getText().toString().trim()
+            model.gender = genderString
+            model.address = etAddress.getText().toString().trim()
+            model.role = roleCode
+
+
+
+            this.let { it1 -> userViewModel.doInsert(model) }
+        }
+
+
+    }
+
+    //emailvalidation
+    private fun isValidEmail(email: String): Boolean {
+        return !TextUtils.isEmpty(email) && Patterns.EMAIL_ADDRESS.matcher(email).matches()
     }
 
     private fun getRoleData() {
@@ -258,7 +326,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
                     position: Int,
                     id: Long
                 ) {
-                    TvRoleM.text = roleDropdown[position].desc
+                    //TvRoleM.text = roleDropdown[position].desc
                     roleCode = roleDropdown[position].code.toString()
 
 
@@ -276,7 +344,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
 
         if (genderList != null) {
-           roleDropdown.clear()
+            roleDropdown.clear()
             val i: Iterator<Any> = genderList.iterator()
             while (i.hasNext()) {
                 val roleModel = Gender(i.next().toString(), i.next().toString())
@@ -289,7 +357,7 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
     }
 
     fun addRadioButtons(number: Int) {
-        radioGroup!!.orientation = LinearLayout.VERTICAL
+        radioGroup!!.orientation = LinearLayout.HORIZONTAL
 
         for (i in 1..number) {
             val rdbtn = RadioButton(this)
