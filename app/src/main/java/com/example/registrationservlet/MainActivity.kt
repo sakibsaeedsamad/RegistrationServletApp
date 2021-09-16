@@ -113,6 +113,14 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
 
                 }
+                else{
+                    cleanFields()
+                    Toast.makeText(
+                        this,
+                        "User Inserted Successfully. " ,
+                        Toast.LENGTH_LONG
+                    ).show()
+                }
 
 
             }
@@ -284,6 +292,8 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
 
 
 
+
+
             this.let { it1 -> userViewModel.doInsert(model) }
         }
 
@@ -378,5 +388,13 @@ class MainActivity : AppCompatActivity(), DatePickerDialog.OnDateSetListener, Vi
     override fun onClick(v: View?) {
         Log.d("Radio Button", " Name " + (v as RadioButton).text + " Id is " + v.getId())
         genderString = (v as RadioButton).text.toString()
+    }
+
+    private fun cleanFields() {
+        etName.setText(null)
+        etMobile.setText(null)
+        etAddress.setText(null)
+        tvDobirth.setText(null)
+        etEmail.setText(null)
     }
 }
